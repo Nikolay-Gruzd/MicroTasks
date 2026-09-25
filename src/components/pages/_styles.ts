@@ -14,7 +14,7 @@ const NavWrapper = styled.div`
         color: #03eaff;
     }
     
-    & > a.hover {
+    & > a:hover {
         color: steelblue;
     }
 `
