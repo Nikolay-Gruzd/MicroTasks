@@ -1,18 +1,22 @@
-import {adidasArr} from "./Adidas.tsx";
-import {pumaArr} from "./Puma.tsx";
+import {adidasArr, AdidasItem} from "./Adidas.tsx";
+import {pumaArr, PumaItem} from "./Puma.tsx";
 import {useParams} from "react-router-dom";
 
-type Props = {
-    page: string
+type SneakersModel = {
+    [key: string]: (AdidasItem[] | PumaItem[])
+}
+const sneakersModel: SneakersModel = {
+    adidas: adidasArr,
+    puma: pumaArr,
 }
 
-export const Model = ({page}:Props) => {
-    const params = useParams()
-    console.log(params)
+export const Model = () => {
+    const {model, id} = useParams()
+    console.log(model)
+    console.log(id)
 
-    const arr = page === '/Adidas' ? adidasArr : page === '/Puma' ? pumaArr : null
-    // const item = arr?.[Number(params.id)]
-    const item = arr?.find(el => el.id === Number(params.id))
+    // const arr = page === '/adidas' ? adidasArr : page === '/puma' ? pumaArr : null
+    const item = model ? sneakersModel[model].find(el => el.id === Number(id)) : null;
 
     // проверка: есть ли элемент по такому индексу
     if (!item) {
